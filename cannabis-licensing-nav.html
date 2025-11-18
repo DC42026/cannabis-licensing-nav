@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cannabis Licensing – Rules, Regulations & Forms</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #111827;
+      --card: #1f2933;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.16);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #374151;
+      --hover: #111827;
+      --danger: #f97373;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Layout */
+    .sidebar {
+      width: 280px;
+      background: rgba(15, 23, 42, 0.96);
+      border-right: 1px solid var(--border);
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .logo-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #a7f3d0, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #022c22;
+      font-size: 18px;
+      box-shadow: 0 0 22px rgba(34, 197, 94, 0.6);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .logo-text h1 {
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .sidebar-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin: 14px 0 6px;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: background 0.16s ease, color 0.16s ease,
+        border-color 0.16s ease, transform 0.08s ease;
+    }
+
+    .nav-item span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item .pill {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+    }
+
+    .nav-item:hover {
+      background: var(--hover);
+      color: #f9fafb;
+      border-color: var(--border);
+      transform: translateY(-1px);
+    }
+
+    .nav-item.active {
+      background: var(--accent-soft);
+      color: #bbf7d0;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.35),
+        0 16px 35px rgba(0, 0, 0, 0.65);
+    }
+
+    .nav-item.active .pill {
+      border-color: rgba(34, 197, 94, 0.7);
+      background: rgba(15, 23, 42, 0.8);
+      color: #bbf7d0;
+    }
+
+    .sidebar-footer {
+      margin-top: 14px;
+      font-size: 11px;
+      padding: 10px 10px 12px;
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--muted);
+    }
+
+    .sidebar-footer strong {
+      color: #e5e7eb;
+    }
+
+    .sidebar-footer small {
+      display: block;
+      margin-top: 4px;
+      color: #6b7280;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      padding: 1px 7px 2px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 22px 26px 22px 26px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 18px;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .title-block h2 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .title-block p {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .control-input {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.82);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .control-input input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 12px;
+      min-width: 160px;
+    }
+
+    .control-button {
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: var(--accent-soft);
+      color: #bbf7d0;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.16s ease, transform 0.08s ease,
+        box-shadow 0.16s ease;
+    }
+
+    .control-button:hover {
+      background: rgba(34, 197, 94, 0.25);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(22, 163, 74, 0.4);
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      color: var(--muted);
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      transition: background 0.16s ease, border-color 0.16s ease,
+        color 0.16s ease;
+    }
+
+    .tab-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4b5563;
+    }
+
+    .tab.active {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: var(--border);
+      color: #f9fafb;
+    }
+
+    .tab.active .tab-dot {
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    }
+
+    /* Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 12px 13px 11px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.16;
+      background: radial-gradient(circle at top left, #22c55e 0, transparent 55%);
+      pointer-events: none;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .chip {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .card-body {
+      font-size: 12px;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-body ul {
+      list-style: none;
+      margin-top: 4px;
+    }
+
+    .card-body li {
+      margin-bottom: 3px;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .card-body a {
+      color: #a7f3d0;
+      text-decoration: none;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .card-body a:hover {
+      text-decoration: underline;
+    }
+
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      margin-top: 6px;
+      text-decoration: none;
+      color: #a7f3d0;
+    }
+
+    .pill-link:hover {
+      border-color: var(--accent);
+    }
+
+    .section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin: 14px 0 8px;
+    }
+
+    .section-title span {
+      color: #e5e7eb;
+    }
+
+    .note {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 8px 0 12px;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 12px;
+    }
+
+    .list-compact {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .list-compact ul {
+      list-style: none;
+      margin-top: 4px;
+    }
+
+    .list-compact li {
+      margin-bottom: 3px;
+    }
+
+    .monospace {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      font-size: 11px;
+    }
+
+    .highlight {
+      color: #bbf7d0;
+    }
+
+    .danger {
+      color: var(--danger);
+    }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .sidebar-footer {
+        width: 100%;
+      }
+
+      .main {
+        padding: 16px;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-badge">DC</div>
+      <div class="logo-text">
+        <h1>Licensing Hub</h1>
+        <span>Cannabis – State & County</span>
+      </div>
+    </div>
+
+    <div class="tag">
+      <span>v1.0</span>
+      <span>Internal Use Only</span>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Primary Navigation</div>
+      <div class="nav-group">
+        <div class="nav-item active" data-section="state">
+          <span>State Licensing (CA)</span>
+          <span class="pill">DCC</span>
+        </div>
+        <div class="nav-item" data-section="counties">
+          <span>County / Local Rules</span>
+          <span class="pill">20 Counties</span>
+        </div>
+        <div class="nav-item" data-section="forms">
+          <span>Forms & Templates</span>
+          <span class="pill">Docs</span>
+        </div>
+        <div class="nav-item" data-section="contacts">
+          <span>Contacts & Support</span>
+          <span class="pill">Team</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Shortcuts</div>
+      <div class="nav-group">
+        <div class="nav-item" data-scroll="#anchor-precheck">
+          <span>Pre-Application Checklist</span>
+          <span class="pill">Start here</span>
+        </div>
+        <div class="nav-item" data-scroll="#anchor-timelines">
+          <span>Timelines & Renewals</span>
+          <span class="pill">Cadence</span>
+        </div>
+        <div class="nav-item" data-scroll="#anchor-sop">
+          <span>SOP & Operating Plans</span>
+          <span class="pill">Ops</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <strong>⚠️ Compliance Note</strong>
+      <small>
+        This navigation is a guide for the Drivon Consulting team. Always confirm requirements on the official state and county websites before submitting applications.
+      </small>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <header class="header">
+      <div class="title-block">
+        <h2>Cannabis Licensing Navigation</h2>
+        <p>
+          Centralized routing for California cannabis license applications, county ordinances,
+          and internal forms. Use the left navigation to move between <span class="highlight">state licensing</span>,
+          <span class="highlight">county rules</span>, and <span class="highlight">forms & contacts</span>.
+        </p>
+        <div class="badge-row">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Live playbook – internal only
+          </div>
+          <div class="badge">
+            20 Counties
+          </div>
+          <div class="badge">
+            All License Types
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="control-input">
+          🔎
+          <input
+            type="text"
+            id="filterInput"
+            placeholder="Filter counties or license types..."
+          />
+        </div>
+        <button class="control-button" id="clearFilter">
+          ✦ Reset Filters
+        </button>
+      </div>
+    </header>
+
+    <!-- TABS -->
+    <nav class="tabs">
+      <button class="tab active" data-section="state">
+        <span class="tab-dot"></span> State Licensing
+      </button>
+      <button class="tab" data-section="counties">
+        <span class="tab-dot"></span> Counties
+      </button>
+      <button class="tab" data-section="forms">
+        <span class="tab-dot"></span> Forms & Templates
+      </button>
+      <button class="tab" data-section="contacts">
+        <span class="tab-dot"></span> Contacts
+      </button>
+    </nav>
+
+    <!-- STATE SECTION -->
+    <section id="section-state" class="content-section">
+      <div class="section-title">
+        <span>State of California – Department of Cannabis Control (DCC)</span>
+      </div>
+      <p class="note">
+        This section summarizes the main state license categories. Local (county/city) approval is
+        usually required <span class="highlight">before or alongside</span> state licensure.
+      </p>
+
+      <div class="grid" id="licenseGrid">
+        <!-- Retailer -->
+        <article class="card license-card" data-tags="retail retailer storefront delivery adult-use medical dispensary">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Retailer (Storefront & Delivery)</div>
+              <div class="card-subtitle">Customer-facing sales – physical premises and/or delivery.</div>
+            </div>
+            <span class="chip">License: Retailer</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                <span>Retail store, dispensary, or delivery-only operations.</span>
+              </li>
+              <li>
+                <span>Requires compliant premises, security, and local authorization.</span>
+              </li>
+              <li>
+                <span>Subject to advertising, packaging, and sales restrictions.</span>
+              </li>
+            </ul>
+            <a class="pill-link" href="#" target="_blank">
+              Open DCC retailer guidance ⟶
+            </a>
+          </div>
+        </article>
+
+        <!-- Microbusiness -->
+        <article class="card license-card" data-tags="microbusiness vertical integration retail distribution manufacturing cultivation">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Microbusiness</div>
+              <div class="card-subtitle">Small, vertically integrated operations.</div>
+            </div>
+            <span class="chip">License: Microbusiness</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                <span>Combines at least <strong>three</strong> activities (e.g., cultivation, manufacturing, distribution, retail).</span>
+              </li>
+              <li>
+                <span>Requires compliance with all rules for each selected activity.</span>
+              </li>
+              <li>
+                <span>Often subject to additional local caps and zoning limits.</span>
+              </li>
+            </ul>
+            <a class="pill-link" href="#" target="_blank">
+              Open microbusiness requirements ⟶
+            </a>
+          </div>
+        </article>
+
+        <!-- Cultivation -->
+        <article class="card license-card" data-tags="cultivation grow outdoor indoor mixed-light nursery processor">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Cultivation</div>
+              <div class="card-subtitle">Outdoor, indoor, mixed-light, nursery, processor.</div>
+            </div>
+            <span class="chip">License: Cultivation</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                <span>Multiple license types based on canopy size and lighting.</span>
+              </li>
+              <li>
+                <span>Includes nursery and processor categories.</span>
+              </li>
+              <li>
+                <span>Requires CEQA compliance, water/energy, and environmental review.</span>
+              </li>
+            </ul>
+            <a class="pill-link" href="#" target="_blank">
+              View cultivation license matrix ⟶
+            </a>
+          </div>
+        </article>
+
+        <!-- Manufacturing -->
+        <article class="card license-card" data-tags="manufacturing volatile nonvolatile infusion extraction type 6 type 7 type n">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Manufacturing</div>
+              <div class="card-subtitle">Non-volatile, volatile, infusion, packaging & labeling.</div>
+            </div>
+            <span class="chip">License: Manufacturing</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                <span>Type 6 (non-volatile), Type 7 (volatile), and other categories.</span>
+              </li>
+              <li>
+                <span>Requires robust SOPs, safety procedures, and facility approvals.</span>
+              </li>
+              <li>
+                <span>Subject to product testing, packaging, and labeling standards.</span>
+              </li>
+            </ul>
+            <a class="pill-link" href="#" target="_blank">
+              View manufacturing guidance ⟶
+            </a>
+          </div>
+        </article>
+
+        <!-- Distribution -->
+        <article class="card license-card" data-tags="distribution distributor transport storage">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Distribution</div>
+              <div class="card-subtitle">Transport, storage, quality assurance, tax collection.</div>
+            </div>
+            <span class="chip">License: Distributor</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                <span>Moves cannabis products between licensees.</span>
+              </li>
+              <li>
+                <span>Performs quality assurance reviews and testing coordination.</span>
+              </li>
+              <li>
+                <span>Responsible for certain taxes and track-and-trace entries.</span>
+              </li>
+            </ul>
+            <a class="pill-link" href="#" target="_blank">
+              View distribution requirements ⟶
+            </a>
+          </div>
+        </article>
+
+        <!-- Testing Laboratory -->
+        <article class="card license-card" data-tags="testing laboratory lab quality safety coa">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Testing Laboratory</div>
+              <div class="card-subtitle">Independent product testing & COAs.</div>
+            </div>
+            <span class="chip">License: Testing Laboratory</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                <span>Performs required compliance testing for cannabis goods.</span>
+              </li>
+              <li>
+                <span>Requires ISO accreditation and rigorous QA systems.</span>
+              </li>
+              <li>
+                <span>Issue Certificates of Analysis (COAs) for product batches.</span>
+              </li>
+            </ul>
+            <a class="pill-link" href="#" target="_blank">
+              Open lab requirements ⟶
+            </a>
+          </div>
+        </article>
+
+        <!-- Event Organizer & Temporary Event -->
+        <article class="card license-card" data-tags="event organizer temporary event trade show festival">
+          <div class="card-header"
+
